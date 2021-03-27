@@ -1,9 +1,9 @@
 
 import React, { useReducer, useEffect } from "react"
 import { highlight } from "highlight.js"
+import "./CodeViewer.css"
 
 let cache = {}
-console.log("cca")
 
 const actions = {
   CLOSE_MODAL: "CLOSE_MODAL",
@@ -29,15 +29,15 @@ function getLanguageFromUrl(url) {
 function CodeModal({ url, language, code, dispatch }) {
   try {
     return (
-      <div className="modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
-        <a className="modal-top hljs-comment" href={url} target="_blank">{url}</a>
+      <div className="sce-modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
+        <a className="sce-modal-top hljs-comment" href={url} target="_blank">{url}</a>
         <pre>
           <code
             className={`hljs language-${language}`}
             dangerouslySetInnerHTML={{ __html: compiletext(code) }}
           />
-          <div className="modal-bottom hljs-comment">... Double-Click to close ...</div>
         </pre>
+        <div className="sce-modal-bottom hljs-comment">... Double-Click to close ...</div>
       </div>
     )
   } catch (err) {

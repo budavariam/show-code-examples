@@ -1,0 +1,35 @@
+.sce-modal.sce-modal {
+  cursor: pointer;
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  opacity: 0.98;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+}
+
+.sce-modal pre {
+  margin: 0;
+  white-space: pre-wrap;
+  padding: 5px;
+
+  font-size: xx-large;
+}
+
+.sce-modal-bottom {
+  font-family: monospace;
+  position: fixed;
+  font-size: small;
+  bottom: 0;
+}
+
+.sce-modal-top {
+  font-family: monospace;
+  position: fixed;
+  font-size: small;
+  top: 0;
+}
