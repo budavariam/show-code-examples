@@ -4,7 +4,7 @@
   - [x] add logo for filetypes in examples
   - [x] fullscreen vs designated area examples
 - [x] different filetypes dynamically based on file extension
-- [ ] publish to npm
-- [ ] add info on cdn usage
+- [x] publish to npm
+- [x] add info on cdn usage
 - [x] style selector for examples
 - [x] add basic code examples
