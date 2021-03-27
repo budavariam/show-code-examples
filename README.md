@@ -104,4 +104,4 @@ There are 2 distinguishable modes:
 1. Run `npm run build`
 1. Run the example `npm run example`
 
-See [index.html](/example/index.html) for a full example.
+See [index.html](/docs/index.html) for a full example.
