@@ -43,8 +43,9 @@ That's why I extracted this logic into this repository and module.
 ```bash
 # open the example
 npm install
+ln -s ./docs ./show-code-examples
 npm run example
-open localhost:8080/example
+open http://localhost:8080/show-code-examples
 ```
 
 ## How to use
