@@ -32,7 +32,7 @@ export function open(event, domNode) {
     initialize("show-code-examples-modal")
   }
   const url = domNode.getAttribute("href")
-  ReactDOM.render(<CodeViewer url={url} />,
+  ReactDOM.render(<CodeViewer url={url} clickEvent={event} />,
     modalParent);
 
   return false

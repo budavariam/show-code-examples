@@ -80,7 +80,7 @@ const reducer = (state, action) => {
   }
 }
 
-export function CodeViewer({ url }) {
+export function CodeViewer({ clickEvent, url }) {
   const [state, dispatch] = useReducer(reducer, {}, () => ({
     code: "",
     language: "bash",
@@ -88,7 +88,7 @@ export function CodeViewer({ url }) {
     isOpen: false,
     errorMessage: null,
   }))
-  console.debug("Opened code viewer", url)
+  console.debug("Opened code viewer", url, state)
 
   useEffect(() => {
     if (url in cache) {
@@ -117,7 +117,7 @@ export function CodeViewer({ url }) {
           })
         });
     }
-  }, [url])
+  }, [url, clickEvent])
 
   return state.isOpen && state.hasData
     ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} />
