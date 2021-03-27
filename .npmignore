@@ -2,3 +2,5 @@ example
 ./webpack.config.js
 docs
 *.js.map
+.vscode
+*.tgz

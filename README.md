@@ -1,6 +1,6 @@
 # show-code-examples
 
-Module to view source code example source codes in a full screen modal.
+Module to view source code in html presentations.
 
 - Uses [highlight.js](https://www.npmjs.com/package/highlight.js) to annotate the code.
 - Detects source code language by file extension
@@ -105,3 +105,14 @@ There are 2 distinguishable modes:
 1. Run the example `npm run example`
 
 See [index.html](/docs/index.html) for a full example.
+
+## Publish
+
+```bash
+npm login
+npm config set sign-git-tag true
+
+npm version patch
+
+npm publish
+```
