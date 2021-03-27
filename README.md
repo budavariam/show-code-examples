@@ -119,10 +119,13 @@ See [index.html](/docs/index.html) for a full example.
 ## Publish
 
 ```bash
-npm login
+# set up gpg for `npm version` command
 npm config set sign-git-tag true
+git config --global gpg.program $(which gpg)
 
+npm login
 npm version patch
-
+# npm pack # check tar file
 npm publish
+git push --tags
 ```
