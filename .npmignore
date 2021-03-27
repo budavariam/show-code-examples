@@ -4,3 +4,4 @@ docs
 *.js.map
 .vscode
 *.tgz
+todo.md
