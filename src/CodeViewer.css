@@ -1,6 +1,6 @@
 .sce-modal.sce-modal {
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   z-index: 10000;
   top: 0;
   opacity: 0.98;
@@ -35,7 +35,8 @@
   top: 0;
 }
 
-.sce-embedded .sce-modal.sce-modal {
+.sce-embedded.sce-modal.sce-modal {
+  position: absolute;
   height: 100%;
   width: 100%;
 }
@@ -49,4 +50,8 @@
 .sce-embedded .sce-modal-top,
 .sce-embedded .sce-modal-bottom {
   position: relative;
+}
+
+.sce-noscroll {
+  overflow: hidden;
 }

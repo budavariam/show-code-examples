@@ -38,8 +38,11 @@ export function open(event, domNode) {
     initialize(modalParentID)
   }
   const url = domNode.getAttribute("href")
-  ReactDOM.render(<CodeViewer url={url} clickEvent={event} />,
-    modalParent);
+  const isFullScreenContainer = modalParent.id === modalParentID
+  ReactDOM.render(
+    <CodeViewer url={url} clickEvent={event} isFullScreenContainer={isFullScreenContainer} />,
+    modalParent
+  );
 
   return false
 };

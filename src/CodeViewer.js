@@ -21,11 +21,14 @@ function getLanguageFromUrl(url) {
   }
 }
 
-function CodeModal({ url, language, code, dispatch }) {
+function CodeModal({ url, language, code, isFullScreenContainer, dispatch }) {
   try {
+    const classNames = `sce-modal hljs ${!isFullScreenContainer ? "sce-embedded" : ""}`
     return (
-      <div className="sce-modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
-        <div className="sce-modal-top"><a className="hljs-comment" href={url} target="_blank">{url}</a></div>
+      <div className={classNames} onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
+        <div className="sce-modal-top">
+          <a className="hljs-comment" href={url} target="_blank">{url}</a>
+        </div>
         <pre>
           <Suspense fallback={null}>
             <CodeHighlight language={language} code={code} />
@@ -74,7 +77,7 @@ const reducer = (state, action) => {
   }
 }
 
-export function CodeViewer({ clickEvent, url }) {
+export function CodeViewer({ clickEvent, url, isFullScreenContainer }) {
   const [state, dispatch] = useReducer(reducer, {}, () => ({
     code: "",
     language: null,
@@ -113,7 +116,14 @@ export function CodeViewer({ clickEvent, url }) {
     }
   }, [url, clickEvent])
 
+  useEffect(() => {
+    document.body.classList.remove("sce-noscroll")
+    if (state.isOpen && isFullScreenContainer) {
+      document.body.classList.add("sce-noscroll")
+    }
+  }, [state.isOpen, isFullScreenContainer])
+
   return state.isOpen && state.hasData
-    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} />
+    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} isFullScreenContainer={isFullScreenContainer} />
     : null
 }
