@@ -1,10 +1,10 @@
 const path = require('path');
-const webpack = require('webpack');
-
+// const webpack = require('webpack');
 
 module.exports = {
-  // mode: 'production',
-  mode: 'development',
+  mode: 'production',
+  // mode: 'development',
+  // devtool: 'source-map',
   entry: './src/wrapper.js',
   output: {
     path: path.resolve(__dirname, 'dist'),

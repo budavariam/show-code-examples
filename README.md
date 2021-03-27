@@ -25,7 +25,7 @@ At first I only needed to use it in one presentation, but I plan on using it in 
 # open the example
 npm install
 npm run example
-open localhost:8080
+open localhost:8080/example
 ```
 
 ## How to use

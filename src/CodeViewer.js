@@ -1,7 +1,7 @@
 
-import React, { useReducer, useEffect } from "react"
-import { highlight } from "highlight.js"
+import React, { useReducer, useEffect, Suspense } from "react"
 import "./CodeViewer.css"
+const CodeHighlight = React.lazy(() => import('./codeHighlight'));
 
 let cache = {}
 
@@ -11,16 +11,6 @@ const actions = {
   SET_ERROR: "SET_ERROR",
 }
 
-function compiletext(text) {
-  const options = { language: "bash", ignoreIllegals: true }
-  const result = highlight(text, options); // use the same highlight as the revealjs module
-
-  ////////// MARKDOWNIT
-  // var md = window.markdownit();
-  // var result = md.render("```bash\n" + text + "\n```");
-  //////////
-  return result.value
-}
 
 function getLanguageFromUrl(url) {
   return "bash"
@@ -32,10 +22,9 @@ function CodeModal({ url, language, code, dispatch }) {
       <div className="sce-modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
         <a className="sce-modal-top hljs-comment" href={url} target="_blank">{url}</a>
         <pre>
-          <code
-            className={`hljs language-${language}`}
-            dangerouslySetInnerHTML={{ __html: compiletext(code) }}
-          />
+          <Suspense fallback={null}>
+            <CodeHighlight language={language} code={code} />
+          </Suspense>
         </pre>
         <div className="sce-modal-bottom hljs-comment">... Double-Click to close ...</div>
       </div>
