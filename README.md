@@ -1,23 +1,32 @@
 # show-code-examples
 
-Module to view source code in a full screen modal. Suited for html presentations.
+Module to view source code example source codes in a full screen modal.
 
 - Uses [highlight.js](https://www.npmjs.com/package/highlight.js) to annotate the code.
 - Detects source code language by file extension
 - Caches source code downloads
 
+![Monokai theme with example js code](./docs/images/example.png)
+
 ## Design decisions
 
-I created slides with reveal.js, and I needed a way to **open examples in full screen mode**, but also be able to **download the source of the files**, without leaving the presentation.
+I created slides with reveal.js for one of my training courses.
+I needed a way to:
 
-My main motivation was to use minimal boilerplate code, that I can copy without modifications.
+- show code without leaving the presentation
+- open examples in full screen mode
+- be able to download the source of the files
+- call from the source with a minimal overhead
+
+My final approach looked like this:
 
 ```md
 - [Examples](./examples/1/hello.sh){onclick="codeExamples.open(event, this)"} {.examples}
 ```
 
-My initial solution added this Javascript code in a `<script>` to the markdown source file.
-At first I only needed to use it in one presentation, but I plan on using it in more presentations later on.
+My initial solution added Javascript code with a simpler module in a `<script>` to the markdown source file.
+
+At first I only needed to use it in one presentation, but I plan on using it in more presentations later on. That's why I extracted this logic.
 
 ## Getting started
 
@@ -55,6 +64,38 @@ open localhost:8080/example
     Bash code example
   </a>
   ```
+
+## Documentation
+
+### codeExamples.initialization(id)
+
+Set a global variable of where to attach the next code viewer modal.
+
+If you don't set a value it will treat as if it's a self managed full screen viewer.
+`.sce-noscroll` will be added to the body element, in order to prevent scrolling while the overlay is active.
+
+Otherwise I assume that you don't want fullscreen view, so `.sce-embedded` class will be
+added to the children of the given container. Some classes are overridden, to work properly.
+
+### codeExamples.open(event, this)
+
+Must be added to an `anchor` tag. It loads the examle file from its `href` location.
+It does not open or download the file when the link has been clicked.
+
+## How it works
+
+The component is written in [React](https://reactjs.org/).
+It's rendered by `ReactDOMRenderer`.
+It's built by [webpack](https://webpack.js.org/).
+
+There are 2 distinguishable modes:
+
+- **Full page view**: Upon opening it creates a DOM node as the last child of the `body`, and renders the react component into it.
+  After it's added it won't be destroyed by the component. A state manages whether it needs to open or not.
+  It will be reused on consequent clicks.
+- **Custom layout**: Same as above with the difference that it will render the component into the given node.
+  I made an assumption that if you want to manage the node by yourself it won't be full layout view, some classes has overrides,
+  you can customize the layout behaviours with your custom css.
 
 ## Development
 
