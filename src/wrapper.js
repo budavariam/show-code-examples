@@ -5,6 +5,10 @@ import React from 'react';
 let modalParent = null
 const modalParentID = "show-code-examples-modal"
 
+export const getDefaultModalParentID = () => {
+  return modalParentID
+}
+
 /**
  * initialize get the element by ID to use for the modal item. if it's not called by the user, defaults to the value of `modalParentID`.
  * 

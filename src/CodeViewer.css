@@ -33,3 +33,12 @@
   font-size: small;
   top: 0;
 }
+
+.sce-embedded .sce-modal.sce-modal {
+    height: 100%;
+    width: 100%;
+}
+
+.sce-embedded .sce-modal-top {
+  position: absolute;
+}
