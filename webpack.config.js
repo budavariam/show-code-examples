@@ -1,10 +1,8 @@
 const path = require('path');
 // const webpack = require('webpack');
 
-module.exports = {
-  // mode: 'production',
-  mode: 'development',
-  devtool: 'source-map',
+let config = {
+  mode: 'production',
   entry: './src/wrapper.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -13,6 +11,7 @@ module.exports = {
       type: 'window',
     },
     filename: 'show-code-examples.min.js',
+    clean: true,
   },
   module: {
     rules: [
@@ -33,3 +32,13 @@ module.exports = {
     ]
   }
 };
+
+if (process.env.NODE_ENV === "development") {
+  config = {
+    ...config,
+    mode: 'development',
+    devtool: 'source-map'
+  }
+}
+
+module.exports = config

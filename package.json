@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "source-map-explorer 'dist/*.js'",
     "build": "npm run test && npm run bundle-js-prod",
-    "dev": "webpack --watch --config ./webpack.config.js",
+    "dev": "NODE_ENV=development webpack --watch --config ./webpack.config.js",
     "example": "http-server -p8080 -c-1 .",
     "bundle-js-prod": "webpack --config ./webpack.config.js"
   },
