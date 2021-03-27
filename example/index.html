@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/example/">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code example viewer</title>
+  <script src="/dist/show-code-examples.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <a href="code/hello-bash.sh" target="_blank" rel="noopener noreferrer"
+        onclick="console.log(event, this); return false">
+        Log Event and DomNode
+      </a>
+    </li>
+    <li>
+      <a href="code/hello-bash.sh" target="_blank" rel="noopener noreferrer" onclick="codeExamples.open(event, this)">
+        Bash code example
+      </a>
+    </li>
+    <li>
+      <a href="code/hello-java.java" target="_blank" rel="noopener noreferrer" onclick="codeExamples.open(event, this)">
+        Java code example
+      </a>
+    </li>
+    <li>
+      <a href="code/hello-js.js" target="_blank" rel="noopener noreferrer" onclick="codeExamples.open(event, this)">
+        Javascript code example
+      </a>
+    </li>
+    <li>
+      <a href="code/hello-go.go" target="_blank" rel="noopener noreferrer" onclick="codeExamples.open(event, this)">
+        Go code example
+      </a>
+    </li>
+  </ul>
+</body>
+
+</html>

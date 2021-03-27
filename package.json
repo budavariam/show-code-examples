@@ -1,0 +1,39 @@
+{
+  "name": "show-code-examples",
+  "version": "1.0.0",
+  "description": "Module to view source code in a full screen modal. Suited for html presentations",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "npm run test && npm run bundle-js-prod",
+    "dev": "webpack --watch --config ./webpack.config.js",
+    "example": "http-server -p8080 -c-1 .",
+    "bundle-js-prod": "webpack --config ./webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/budavariam/show-code-examples.git"
+  },
+  "author": "Mátyás Budavári <budavariam@gmail.com> (https://budavariam.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sevenleaps/show-code-examples/issues"
+  },
+  "homepage": "https://github.com/sevenleaps/show-code-examples#readme",
+  "dependencies": {
+    "highlight.js": "^10.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "optionalDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.13",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/runtime": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
