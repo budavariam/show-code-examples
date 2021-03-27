@@ -1,22 +1,15 @@
 import React from "react"
-import { highlight } from "highlight.js"
-
-function compiletext(language, text) {
-    const options = { language, ignoreIllegals: true }
-    const result = highlight(text, options); // use the same highlight as the revealjs module
-
-    ////////// MARKDOWNIT
-    // var md = window.markdownit();
-    // var result = md.render("```bash\n" + text + "\n```");
-    //////////
-    return result.value
-}
+import { highlightAuto, getLanguage } from "highlight.js"
 
 const CodeHighlight = ({ language, code }) => {
+    const languageSubset = getLanguage(language)
+        ? [language]
+        : null
+    const highlightResult = highlightAuto(code, languageSubset)
     return (
         <code
-            className={`hljs language-${language}`}
-            dangerouslySetInnerHTML={{ __html: compiletext(language, code) }}
+            className="hljs"
+            dangerouslySetInnerHTML={{ __html: highlightResult.value }}
         />
     )
 }

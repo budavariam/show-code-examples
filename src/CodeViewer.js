@@ -13,7 +13,12 @@ const actions = {
 
 
 function getLanguageFromUrl(url) {
-  return "bash"
+  try {
+    return new URL(url, window.location.href).pathname.split('/').pop().split('.').pop();
+  } catch (err) {
+    console.warning("Failed to get file extension from url", url, err)
+    return null
+  }
 }
 
 function CodeModal({ url, language, code, dispatch }) {
@@ -72,7 +77,7 @@ const reducer = (state, action) => {
 export function CodeViewer({ clickEvent, url }) {
   const [state, dispatch] = useReducer(reducer, {}, () => ({
     code: "",
-    language: "bash",
+    language: null,
     hasData: false,
     isOpen: false,
     errorMessage: null,
