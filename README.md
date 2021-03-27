@@ -2,6 +2,8 @@
 
 Module to view source code in html presentations.
 
+See it live on [github pages](https://budavariam.github.io/show-code-examples).
+
 - Uses [highlight.js](https://www.npmjs.com/package/highlight.js) to annotate the code.
 - Detects source code language by file extension
 - Caches source code downloads
@@ -17,16 +19,24 @@ I needed a way to:
 - open examples in full screen mode
 - be able to download the source of the files
 - call from the source with a minimal overhead
+- scrollable overlay for the examples
 
 My final approach looked like this:
 
 ```md
-- [Examples](./examples/1/hello.sh){onclick="codeExamples.open(event, this)"} {.examples}
+<script>
+var codeExamples = {open: function(event, domnode){
+    //here be LONG vanilla js code
+}}
+</script>
+
+- [First Examples](./examples/1/hello.sh){onclick="codeExamples.open(event, this)"} {.examples}
+- [Second Examples](./examples/2/hello.awk){onclick="codeExamples.open(event, this)"} {.examples}
+- [Third Examples](./examples/3/hello.py){onclick="codeExamples.open(event, this)"} {.examples}
 ```
 
-My initial solution added Javascript code with a simpler module in a `<script>` to the markdown source file.
-
-At first I only needed to use it in one presentation, but I plan on using it in more presentations later on. That's why I extracted this logic.
+At first I only needed to use it in one presentation, but I plan on using it in more presentations later on.
+That's why I extracted this logic into this repository and module.
 
 ## Getting started
 
