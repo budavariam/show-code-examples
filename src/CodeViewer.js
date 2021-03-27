@@ -20,7 +20,7 @@ function CodeModal({ url, language, code, dispatch }) {
   try {
     return (
       <div className="sce-modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
-        <a className="sce-modal-top hljs-comment" href={url} target="_blank">{url}</a>
+        <div className="sce-modal-top"><a className="hljs-comment" href={url} target="_blank">{url}</a></div>
         <pre>
           <Suspense fallback={null}>
             <CodeHighlight language={language} code={code} />

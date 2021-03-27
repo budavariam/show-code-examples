@@ -6,17 +6,18 @@
   opacity: 0.98;
   left: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   padding: 0;
 }
 
 .sce-modal pre {
-  margin: 0;
+  margin: auto;
   white-space: pre-wrap;
   padding: 5px;
-
+  /* width: 100%;
+  height: 100%; */
   font-size: xx-large;
 }
 
@@ -35,10 +36,17 @@
 }
 
 .sce-embedded .sce-modal.sce-modal {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
-.sce-embedded .sce-modal-top {
-  position: absolute;
+.sce-modal-top,
+.sce-modal-bottom {
+  text-align: center;
+  width: 100%;
+}
+
+.sce-embedded .sce-modal-top,
+.sce-embedded .sce-modal-bottom {
+  position: relative;
 }
