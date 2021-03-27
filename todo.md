@@ -6,5 +6,5 @@
 - [x] different filetypes dynamically based on file extension
 - [ ] publish to npm
 - [ ] add info on cdn usage
-- [ ] style selector for examples
+- [x] style selector for examples
 - [x] add basic code examples
