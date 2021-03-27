@@ -13,7 +13,7 @@
 }
 
 .sce-modal pre {
-  margin: auto;
+  margin: 0 auto;
   white-space: pre-wrap;
   padding: 5px;
   /* width: 100%;

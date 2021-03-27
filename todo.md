@@ -7,4 +7,4 @@
 - [ ] publish to npm
 - [ ] add info on cdn usage
 - [ ] style selector for examples
-- [ ] add basic code examples
+- [x] add basic code examples
