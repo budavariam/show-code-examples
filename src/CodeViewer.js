@@ -1,68 +1,125 @@
 
-import React from "react"
+import React, { useReducer, useEffect } from "react"
+import { highlight } from "highlight.js"
 
 let cache = {}
 console.log("cca")
 
+const actions = {
+  CLOSE_MODAL: "CLOSE_MODAL",
+  OPEN_MODAL: "OPEN_MODAL",
+  SET_ERROR: "SET_ERROR",
+}
+
 function compiletext(text) {
-  var result = hljs.highlight("bash", text).value; // use the same highlight as the revealjs module
+  const options = { language: "bash", ignoreIllegals: true }
+  const result = highlight(text, options); // use the same highlight as the revealjs module
 
   ////////// MARKDOWNIT
   // var md = window.markdownit();
   // var result = md.render("```bash\n" + text + "\n```");
   //////////
-  return result
+  return result.value
 }
 
-function showtext(url, text) {
+function getLanguageFromUrl(url) {
+  return "bash"
+}
+
+function CodeModal({ url, language, code, dispatch }) {
   try {
-    /////// Highlightjs assume bash
-    var pre = document.createElement("pre")
-    var code = document.createElement("code")
-    code.classList.add("language-bash")
-    code.classList.add("hljs") // have the same background as in the theme
-    code.innerHTML = text
-    pre.appendChild(code)
-    ///////
-    var domnode = document.createElement("div");
-    domnode.classList.add("modal")
-    domnode.classList.add("hljs")
-    domnode.ondblclick = function() {domnode.remove()} // remove on click
-    var sourcefile = document.createElement("a")
-    sourcefile.classList.add("modal-top")
-    sourcefile.classList.add("hljs-comment")
-    sourcefile.setAttribute("href", url)
-    sourcefile.setAttribute("target", "_blank")
-    sourcefile.innerText = url
-    var info = document.createElement("div")
-    info.classList.add("modal-bottom")
-    info.classList.add("hljs-comment")
-    info.innerText = "... Double-Click to close ..."
-    domnode.appendChild(sourcefile)
-    domnode.appendChild(pre)
-    domnode.appendChild(info)
-    document.body.appendChild(domnode) // add to the bottom of the page over everything
+    return (
+      <div className="modal hljs" onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
+        <a className="modal-top hljs-comment" href={url} target="_blank">{url}</a>
+        <pre>
+          <code
+            className={`hljs language-${language}`}
+            dangerouslySetInnerHTML={{ __html: compiletext(code) }}
+          />
+          <div className="modal-bottom hljs-comment">... Double-Click to close ...</div>
+        </pre>
+      </div>
+    )
   } catch (err) {
     console.error("Failed to parse", err)
+    return null
   }
 }
 
-export function CodeViewer(url) {
-  console.log("Opened code viewer", url)
-  if (url in cache) {
-    showtext(url, cache[url])
-  } else {
-    fetch(url)
-      .then(response => response.text())
-      .then(text => {
-        const result = compiletext(text)
-        cache[url] = result;
-        return result;
-      })
-      .then(result => showtext(url, result))
-      .catch(data => {
-        console.error(data);
-      });
+const reducer = (state, action) => {
+  if (!action || !action.type) {
+    return state
   }
-  return false;
+  switch (action.type) {
+    case actions.OPEN_MODAL: {
+      return {
+        ...state,
+        isOpen: true,
+        hasData: true,
+        language: action.language,
+        code: action.code
+      }
+    }
+    case actions.CLOSE_MODAL: {
+      return {
+        ...state,
+        isOpen: false,
+      }
+    }
+    case actions.SET_ERROR: {
+      return {
+        ...state,
+        isOpen: false,
+        errorMessage: action.error,
+        hasData: false,
+      }
+    }
+    default: {
+      console.warn("Unhandled action", action)
+    }
+  }
+}
+
+export function CodeViewer({ url }) {
+  const [state, dispatch] = useReducer(reducer, {}, () => ({
+    code: "",
+    language: "bash",
+    hasData: false,
+    isOpen: false,
+    errorMessage: null,
+  }))
+  console.debug("Opened code viewer", url)
+
+  useEffect(() => {
+    if (url in cache) {
+      dispatch({
+        type: actions.OPEN_MODAL,
+        code: cache[url],
+        language: getLanguageFromUrl(url)
+      })
+    } else {
+      fetch(url)
+        .then(response => response.text())
+        .then(text => {
+          cache[url] = text;
+          return text;
+        })
+        .then(result => dispatch({
+          type: actions.OPEN_MODAL,
+          code: result,
+          language: getLanguageFromUrl(url)
+        }))
+        .catch(error => {
+          console.error(error);
+          dispatch({
+            type: actions.SET_ERROR,
+            error: error
+          })
+        });
+    }
+  }, [url])
+
+  return state.isOpen && state.hasData
+    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} />
+    : null
 }
