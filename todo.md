@@ -1,7 +1,7 @@
 # Ideas to do
 
-- [ ] nice layout for the examples
-  - [ ] add logo for filetypes in examples
+- [x] nice layout for the examples
+  - [x] add logo for filetypes in examples
   - [x] fullscreen vs designated area examples
 - [x] different filetypes dynamically based on file extension
 - [ ] publish to npm

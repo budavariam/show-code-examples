@@ -1,6 +1,49 @@
+body {
+    background-color: #fefae0;
+}
+
+main {
+    max-width: 630px;
+    margin: 0 auto;
+}
+
 #highlight-container {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border: 1px solid black;
+    position: relative;
+    width: 630px;
+    height: 630px;
+    border: 1px solid #d4a373;
+    background-color: #faedcd;
+}
+
+.language-container {
+    grid-template-columns: repeat(4, 150px);
+    display: grid;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.language-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    widtH: 150px;
+    height: 150px;
+    border: 1px solid #ccd5ae;
+    border-radius: 10px;
+    background-color: #e9edc9;
+}
+
+.language-box > img {
+    height: 64px;
+}
+
+a {
+    padding-top: 0.5em;
+    color: black;
+}
+
+footer {
+    text-align: center;
+    margin: 2em 0;
 }
