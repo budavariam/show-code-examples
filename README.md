@@ -38,6 +38,12 @@ var codeExamples = {open: function(event, domnode){
 At first I only needed to use it in one presentation, but I plan on using it in more presentations later on.
 That's why I extracted this logic into this repository and module.
 
+## Browser support
+
+I've created this tool for personal use, and I only used it from desktop Chrome.
+
+If you miss a feature, send an issue. In the meantime you can override css and PRs are welcome.
+
 ## Getting started
 
 ```bash
@@ -116,6 +122,11 @@ There are 2 distinguishable modes:
 1. Run the example `npm run example`
 
 See [index.html](/docs/index.html) for a full example.
+
+## Contribution
+
+- Fork, modify, send pull request
+- I currently use prettify for file formatting, but it's not enforced yet
 
 ## Publish
 
