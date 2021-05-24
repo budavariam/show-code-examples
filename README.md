@@ -118,7 +118,9 @@ There are 2 distinguishable modes:
 
 1. Clone the repo
 1. Run `npm install`
-1. Run `npm run build`
+1. Run `npm run dev`
+1. Create a link to `show-code-examples` to match with the github-pages paths
+1. Change script location to `<script src="/dist/show-code-examples.min.js" type="text/javascript"></script>`
 1. Run the example `npm run example`
 
 See [index.html](/docs/index.html) for a full example.
@@ -136,6 +138,7 @@ npm config set sign-git-tag true
 git config --global gpg.program $(which gpg)
 
 npm login
+npm run build
 npm version patch
 # npm pack # check tar file
 npm publish

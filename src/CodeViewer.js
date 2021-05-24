@@ -34,7 +34,10 @@ function CodeModal({ url, language, code, isFullScreenContainer, dispatch }) {
             <CodeHighlight language={language} code={code} />
           </Suspense>
         </pre>
-        <div className="sce-modal-bottom hljs-comment">... Double-Click to close ...</div>
+        <div
+          className="sce-modal-bottom hljs-comment"
+          onClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}
+        >... Double-Click anywhere or click HERE to close ...</div>
       </div>
     )
   } catch (err) {

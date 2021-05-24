@@ -10,6 +10,6 @@
 - [x] add basic code examples
 - [ ] improve mobile support
   - [x] fix cover fullscreen on mobile
-  - [ ] close button instead of doubleclick
+  - [x] close button instead of doubleclick in mobile
   - [ ] full screen scrolling misbehave if sizes do not match
 - [x] add fork me on githuub button
