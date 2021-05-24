@@ -8,8 +8,8 @@
 - [x] add info on cdn usage
 - [x] style selector for examples
 - [x] add basic code examples
-- [ ] improve mobile support
+- [x] improve mobile support
   - [x] fix cover fullscreen on mobile
   - [x] close button instead of doubleclick in mobile
-  - [ ] full screen scrolling misbehave if sizes do not match
+  - [x] full screen scrolling misbehave if sizes do not match
 - [x] add fork me on githuub button
