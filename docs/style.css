@@ -11,14 +11,14 @@ main {
 
 #highlight-container {
     position: relative;
-    width: 630px;
+    max-width: 630px;
     height: 630px;
     border: 1px solid #d4a373;
     background-color: #faedcd;
 }
 
 .language-container {
-    grid-template-columns: repeat(4, 150px);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     display: grid;
     column-gap: 10px;
     row-gap: 10px;
