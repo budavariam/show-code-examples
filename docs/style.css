@@ -6,6 +6,7 @@ body {
 main {
     max-width: 630px;
     margin: 0 auto;
+    overflow: scroll;
 }
 
 #highlight-container {
