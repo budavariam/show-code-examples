@@ -12,7 +12,5 @@ services:
       - /app/node_modules
     environment:
       NODE_ENV: development
-      # webpack 5.28 uses a legacy OpenSSL hash that Node 17+ removed
-      NODE_OPTIONS: --openssl-legacy-provider
       # Output to docs/dist/ so the static server can find the bundle via the symlink
       WEBPACK_OUTPUT_PATH: docs/dist

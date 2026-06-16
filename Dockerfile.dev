@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
@@ -7,13 +7,6 @@ COPY package*.json ./
 RUN npm ci
 
 EXPOSE 8080
-
-# Source is bind-mounted at runtime by docker-compose; deps come from the image layer.
-# The entrypoint:
-#   1. Creates the symlink required by the <base href="/show-code-examples/"> in index.html
-#   2. Starts webpack in watch mode (rebuilds to docs/dist/ on every source change)
-#   3. Starts a static file server on port 8080 serving the project root
-# Open http://localhost:8080/show-code-examples/ in your browser.
 CMD sh -c "\
   ln -sf /app/docs /app/show-code-examples && \
   ./node_modules/.bin/webpack --watch --config webpack.config.js & \
