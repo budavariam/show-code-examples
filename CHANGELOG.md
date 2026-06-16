@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2026-06-16
+
 ### Added
 - Optional copy-to-clipboard button (`copyButton` option in `initialize()`). Shows Copy → Copying → Copied with a 2.5 s reset. Uses the Clipboard API with an `execCommand` fallback for older browsers.
 - `initialize(id, options)` now accepts an options object (second argument).
@@ -65,7 +67,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation with a vanilla JS proof-of-concept.
 - Wrapper module exposing `codeExamples.open(event, domNode)` and `codeExamples.initialize(id)`.
 
-[Unreleased]: https://github.com/budavariam/show-code-examples/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/budavariam/show-code-examples/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/budavariam/show-code-examples/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/budavariam/show-code-examples/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/budavariam/show-code-examples/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/budavariam/show-code-examples/compare/v0.0.1...v0.0.2

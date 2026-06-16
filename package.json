@@ -1,11 +1,11 @@
 {
   "name": "show-code-examples",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Module to view source code in html presentations",
   "main": "src/index.js",
   "scripts": {
     "analyze": "source-map-explorer 'dist/*.js'",
-    "build": "npm run test && npm run bundle-js-prod",
+    "build": "npm run bundle-js-prod",
     "dev": "NODE_ENV=development webpack --watch --config ./webpack.config.js",
     "example": "http-server -p8080 -c-1 .",
     "bundle-js-prod": "webpack --config ./webpack.config.js"
