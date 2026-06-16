@@ -5,3 +5,8 @@ docs
 .vscode
 *.tgz
 todo.md
+Dockerfile.dev
+docker-compose.yml
+.dockerignore
+.github
+CHANGELOG.md

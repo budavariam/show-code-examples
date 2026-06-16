@@ -1,0 +1,18 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      # Mount the project root so webpack picks up source changes live
+      - .:/app
+      # Shadow node_modules with the image's copy (avoids host/container arch mismatch)
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      # webpack 5.28 uses a legacy OpenSSL hash that Node 17+ removed
+      NODE_OPTIONS: --openssl-legacy-provider
+      # Output to docs/dist/ so the static server can find the bundle via the symlink
+      WEBPACK_OUTPUT_PATH: docs/dist

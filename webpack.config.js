@@ -1,11 +1,14 @@
 const path = require('path');
-// const webpack = require('webpack');
+
+const outputPath = process.env.WEBPACK_OUTPUT_PATH
+  ? path.resolve(__dirname, process.env.WEBPACK_OUTPUT_PATH)
+  : path.resolve(__dirname, 'dist');
 
 let config = {
   mode: 'production',
   entry: './src/wrapper.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: outputPath,
     library: {
       name: 'codeExamples',
       type: 'window',

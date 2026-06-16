@@ -7,6 +7,7 @@ See it live on [github pages](https://budavariam.github.io/show-code-examples).
 - Uses [highlight.js](https://www.npmjs.com/package/highlight.js) to annotate the code.
 - Detects source code language by file extension
 - Caches source code downloads
+- Optional copy-to-clipboard button
 
 ![Monokai theme with example js code](./docs/images/example.png)
 
@@ -68,7 +69,7 @@ open http://localhost:8080/show-code-examples
   <script src="/dist/show-code-examples.min.js" type="text/javascript"></script>
   ```
 
-- Optional: Set the parent container for the modal: `codeExamples.initialize("my-examples-modal")`
+- Optional: Set the parent container for the modal with options: `codeExamples.initialize("my-examples-modal", { copyButton: true })`
 - Create a link to load up the modal. This boilderplate is necessary: `codeExamples.open(event, this)`
 
   ```html
@@ -84,7 +85,7 @@ open http://localhost:8080/show-code-examples
 
 ## Documentation
 
-### codeExamples.initialization(id)
+### codeExamples.initialization(id, options)
 
 Set a global variable of where to attach the next code viewer modal.
 
@@ -93,6 +94,16 @@ If you don't set a value it will treat as if it's a self managed full screen vie
 
 Otherwise I assume that you don't want fullscreen view, so `.sce-embedded` class will be
 added to the children of the given container. Some classes are overridden, to work properly.
+
+#### Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `copyButton` | `boolean` | `false` | Show a **Copy / Copying / Copied** button in the top-right corner of the viewer that copies the full source to the clipboard. Uses the Clipboard API with an `execCommand` fallback for older browsers. |
+
+```js
+codeExamples.initialize("my-examples-modal", { copyButton: true })
+```
 
 ### codeExamples.open(event, this)
 

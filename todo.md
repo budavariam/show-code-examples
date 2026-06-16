@@ -12,4 +12,6 @@
   - [x] fix cover fullscreen on mobile
   - [x] close button instead of doubleclick in mobile
   - [x] full screen scrolling misbehave if sizes do not match
+  - [x] fix left-side text cut off on mobile (pre overflow contained inside modal)
 - [x] add fork me on githuub button
+- [x] optional copy-to-clipboard button (Copy → Copying → Copied, with Clipboard API + execCommand fallback)
