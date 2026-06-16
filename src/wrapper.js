@@ -4,7 +4,7 @@ import React from 'react';
 
 let modalParent = null
 const modalParentID = "show-code-examples-modal"
-const DEFAULT_OPTIONS = { copyButton: false }
+const DEFAULT_OPTIONS = { copyButton: false, selectOnCmdA: false, opacity: 98 }
 let globalOptions = { ...DEFAULT_OPTIONS }
 
 export const getDefaultModalParentID = () => {
@@ -44,7 +44,7 @@ export function open(event, domNode) {
   const url = domNode.getAttribute("href")
   const isFullScreenContainer = modalParent.id === modalParentID
   ReactDOM.render(
-    <CodeViewer url={url} clickEvent={event} isFullScreenContainer={isFullScreenContainer} copyButton={globalOptions.copyButton} />,
+    <CodeViewer url={url} clickEvent={event} isFullScreenContainer={isFullScreenContainer} copyButton={globalOptions.copyButton} selectOnCmdA={globalOptions.selectOnCmdA} opacity={globalOptions.opacity} />,
     modalParent
   );
 

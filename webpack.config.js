@@ -14,6 +14,7 @@ let config = {
       type: 'window',
     },
     filename: 'show-code-examples.min.js',
+    chunkFilename: 'show-code-examples.[contenthash:4].min.js',
     clean: true,
   },
   module: {

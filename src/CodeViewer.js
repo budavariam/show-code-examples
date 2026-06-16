@@ -70,16 +70,46 @@ function CopyButton({ code }) {
   )
 }
 
-function CodeModal({ url, language, code, isFullScreenContainer, dispatch, copyButton }) {
+function CodeModal({ url, language, code, isFullScreenContainer, dispatch, copyButton, selectOnCmdA, opacity }) {
+  const modalRef = useRef(null)
+  const preRef = useRef(null)
+
+  useEffect(() => {
+    if (selectOnCmdA && modalRef.current) {
+      modalRef.current.focus()
+    }
+  }, [selectOnCmdA])
+
+  function handleKeyDown(e) {
+    if (selectOnCmdA && (e.metaKey || e.ctrlKey) && e.key === 'a') {
+      e.preventDefault()
+      if (preRef.current) {
+        const range = document.createRange()
+        range.selectNodeContents(preRef.current)
+        const sel = window.getSelection()
+        sel.removeAllRanges()
+        sel.addRange(range)
+      }
+    }
+  }
+
   try {
     const classNames = `sce-modal hljs ${!isFullScreenContainer ? "sce-embedded" : ""}`
+    const style = opacity != null ? { opacity: opacity / 100 } : undefined
     return (
-      <div className={classNames} onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}>
+      <div
+        ref={modalRef}
+        className={classNames}
+        style={style}
+        tabIndex={selectOnCmdA ? 0 : undefined}
+        onKeyDown={handleKeyDown}
+        onDoubleClick={() => { dispatch({ type: actions.CLOSE_MODAL }) }}
+      >
         <div className="sce-modal-top">
           <a className="hljs-comment" href={url} target="_blank">{url}</a>
           {copyButton && <CopyButton code={code} />}
         </div>
-        <pre>
+        <pre ref={preRef}>
           <Suspense fallback={null}>
             <CodeHighlight language={language} code={code} />
           </Suspense>
@@ -134,7 +164,7 @@ const reducer = (state, action) => {
   }
 }
 
-export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton }) {
+export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton, selectOnCmdA, opacity }) {
   const [state, dispatch] = useReducer(reducer, {}, () => ({
     code: "",
     language: null,
@@ -179,6 +209,6 @@ export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton 
   }, [state.isOpen, isFullScreenContainer])
 
   return state.isOpen && state.hasData
-    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} isFullScreenContainer={isFullScreenContainer} copyButton={copyButton} />
+    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} isFullScreenContainer={isFullScreenContainer} copyButton={copyButton} selectOnCmdA={selectOnCmdA} opacity={opacity} />
     : null
 }
