@@ -1,4 +1,4 @@
-import { CodeViewer } from './CodeViewer';
+import { CodeViewer, preloadCache } from './CodeViewer';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
@@ -51,3 +51,4 @@ export function open(event, domNode) {
   return false
 };
 
+export { preloadCache };

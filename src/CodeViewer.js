@@ -5,6 +5,11 @@ const CodeHighlight = React.lazy(() => import('./codeHighlight'));
 
 let cache = {}
 
+export function preloadCache(bundle) {
+  if (!bundle || typeof bundle !== "object") return
+  Object.assign(cache, bundle)
+}
+
 const actions = {
   CLOSE_MODAL: "CLOSE_MODAL",
   OPEN_MODAL: "OPEN_MODAL",

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.6] - Unreleased
 
 ### Added
+- `preloadCache(bundle)` function: accepts a `{ url: code }` map and pre-populates the internal cache so files are served from memory instead of being fetched over the network. Useful for offline-friendly presentations that bundle all source files at build time.
 - `selectOnCmdA` option in `initialize()`: when enabled, the modal auto-focuses on open and `Cmd/Ctrl+A` selects only the code content instead of the whole page.
 - `opacity` option in `initialize()`: configures modal opacity as a percentage integer (e.g. `99` → `0.99`). Default is `98`, matching the previous hardcoded value.
 
