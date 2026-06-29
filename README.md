@@ -8,6 +8,7 @@ See it live on [github pages](https://budavariam.github.io/show-code-examples).
 - Detects source code language by file extension
 - Caches source code downloads
 - Optional copy-to-clipboard button
+- Optional configurable action button (e.g. "Open in Playground")
 
 ![Monokai theme with example js code](./docs/images/example.png)
 
@@ -100,9 +101,32 @@ added to the children of the given container. Some classes are overridden, to wo
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `copyButton` | `boolean` | `false` | Show a **Copy / Copying / Copied** button in the top-right corner of the viewer that copies the full source to the clipboard. Uses the Clipboard API with an `execCommand` fallback for older browsers. |
+| `selectOnCmdA` | `boolean` | `false` | Auto-focus the modal on open so `Cmd/Ctrl+A` selects only the code content instead of the whole page. |
+| `opacity` | `number` | `98` | Modal background opacity as a percentage integer (e.g. `99` → `0.99`). |
+| `actionButton` | `object\|null` | `null` | Show an extra action button next to copy. Accepts `{ label: string, callback: (code, url) => void }`. See per-link overrides below. |
 
 ```js
 codeExamples.initialize("my-examples-modal", { copyButton: true })
+```
+
+#### actionButton — per-link overrides
+
+When `actionButton` is configured globally, individual links can override the label or callback via data attributes:
+
+| Attribute | Description |
+| --- | --- |
+| `data-sce-action-label` | Override the button label for this link only. |
+| `data-sce-action-callback` | Name of a `window`-scoped function to use as the callback for this link only. |
+
+```html
+<a
+  href="code/hello.rs"
+  onclick="codeExamples.open(event, this)"
+  data-sce-action-label="Run"
+  data-sce-action-callback="openInPlayground"
+>
+  Rust example
+</a>
 ```
 
 ### codeExamples.open(event, this)

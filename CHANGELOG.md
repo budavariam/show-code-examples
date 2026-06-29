@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `preloadCache(bundle)` function: accepts a `{ url: code }` map and pre-populates the internal cache so files are served from memory instead of being fetched over the network. Useful for offline-friendly presentations that bundle all source files at build time.
 - `selectOnCmdA` option in `initialize()`: when enabled, the modal auto-focuses on open and `Cmd/Ctrl+A` selects only the code content instead of the whole page.
 - `opacity` option in `initialize()`: configures modal opacity as a percentage integer (e.g. `99` → `0.99`). Default is `98`, matching the previous hardcoded value.
+- `actionButton` option in `initialize()`: adds an optional action button next to the copy button. Accepts `{ label: string, callback: (code, url) => void }`. Per-link overrides are supported via `data-sce-action-label` (override label) and `data-sce-action-callback` (window-scoped function name) data attributes on the anchor element.
 
 ### Changed
 - Modal opacity is now driven by an inline style from the `opacity` option instead of a hardcoded CSS rule, making it overridable without a specificity hack.

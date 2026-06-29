@@ -4,7 +4,7 @@ import React from 'react';
 
 let modalParent = null
 const modalParentID = "show-code-examples-modal"
-const DEFAULT_OPTIONS = { copyButton: false, selectOnCmdA: false, opacity: 98 }
+const DEFAULT_OPTIONS = { copyButton: false, selectOnCmdA: false, opacity: 98, actionButton: null }
 let globalOptions = { ...DEFAULT_OPTIONS }
 
 export const getDefaultModalParentID = () => {
@@ -43,8 +43,23 @@ export function open(event, domNode) {
   }
   const url = domNode.getAttribute("href")
   const isFullScreenContainer = modalParent.id === modalParentID
+
+  let actionButton = globalOptions.actionButton || null
+  if (actionButton) {
+    const perLinkLabel = domNode.dataset.sceActionLabel
+    const perLinkCallback = domNode.dataset.sceActionCallback
+    if (perLinkLabel || perLinkCallback) {
+      actionButton = {
+        label: perLinkLabel || actionButton.label,
+        callback: perLinkCallback
+          ? (typeof window[perLinkCallback] === "function" ? window[perLinkCallback] : actionButton.callback)
+          : actionButton.callback,
+      }
+    }
+  }
+
   ReactDOM.render(
-    <CodeViewer url={url} clickEvent={event} isFullScreenContainer={isFullScreenContainer} copyButton={globalOptions.copyButton} selectOnCmdA={globalOptions.selectOnCmdA} opacity={globalOptions.opacity} />,
+    <CodeViewer url={url} clickEvent={event} isFullScreenContainer={isFullScreenContainer} copyButton={globalOptions.copyButton} actionButton={actionButton} selectOnCmdA={globalOptions.selectOnCmdA} opacity={globalOptions.opacity} />,
     modalParent
   );
 

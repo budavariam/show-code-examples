@@ -75,7 +75,19 @@ function CopyButton({ code }) {
   )
 }
 
-function CodeModal({ url, language, code, isFullScreenContainer, dispatch, copyButton, selectOnCmdA, opacity }) {
+function ActionButton({ label, code, url, callback }) {
+  function handleClick(e) {
+    e.stopPropagation()
+    callback(code, url)
+  }
+  return (
+    <button className="sce-copy-btn hljs-comment" onClick={handleClick}>
+      {label}
+    </button>
+  )
+}
+
+function CodeModal({ url, language, code, isFullScreenContainer, dispatch, copyButton, actionButton, selectOnCmdA, opacity }) {
   const modalRef = useRef(null)
   const preRef = useRef(null)
 
@@ -113,6 +125,7 @@ function CodeModal({ url, language, code, isFullScreenContainer, dispatch, copyB
         <div className="sce-modal-top">
           <a className="hljs-comment" href={url} target="_blank">{url}</a>
           {copyButton && <CopyButton code={code} />}
+          {actionButton && <ActionButton label={actionButton.label} code={code} url={url} callback={actionButton.callback} />}
         </div>
         <pre ref={preRef}>
           <Suspense fallback={null}>
@@ -169,7 +182,7 @@ const reducer = (state, action) => {
   }
 }
 
-export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton, selectOnCmdA, opacity }) {
+export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton, actionButton, selectOnCmdA, opacity }) {
   const [state, dispatch] = useReducer(reducer, {}, () => ({
     code: "",
     language: null,
@@ -214,6 +227,6 @@ export function CodeViewer({ clickEvent, url, isFullScreenContainer, copyButton,
   }, [state.isOpen, isFullScreenContainer])
 
   return state.isOpen && state.hasData
-    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} isFullScreenContainer={isFullScreenContainer} copyButton={copyButton} selectOnCmdA={selectOnCmdA} opacity={opacity} />
+    ? <CodeModal language={state.language} code={state.code} url={url} dispatch={dispatch} isFullScreenContainer={isFullScreenContainer} copyButton={copyButton} actionButton={actionButton} selectOnCmdA={selectOnCmdA} opacity={opacity} />
     : null
 }
